@@ -1,0 +1,14 @@
+
+1)Completar el modelo de diseño (Alarmas) finalizando el diagrama de estados
+
+
+2)Elaborar el modelo de implementacion del sistema
+
+
+3)Generar el codigo de los esqueletos de las clases a partir del modelo de implementacion
+	
+
+4)Implementar la funcionalidad completa de las clases
+	a) Implementar interfaz grafica que permita probar la aplicacion
+
+
