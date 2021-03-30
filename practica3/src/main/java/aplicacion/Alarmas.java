@@ -5,9 +5,9 @@ import Estados.*;
 public class Alarmas {
 	
 	/*Atributos*/
-	AlarmasState state; 
+	AlarmasState state;
 	Queue<Alarma> alarmasActivas = new Queue<Alarma>();
-	ArrayList<Alarma> alarmasDesaactivadas = new ArrayList<Alarma>();
+	ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 
 	/*Constructor */
 	public Alarmas(AlarmasState state) {
@@ -15,20 +15,42 @@ public class Alarmas {
 	};
 
 	/*Métodos*/
+	public Alarma alarma(String id) {
+		for (Alarma a : alarmasActivas) {
+			if(a.toString().equals(id)) {
+				return a;
+			}
+		}
+		for(Alarma a : alarmasDesactivadas) {
+			if(a.toString().equals(id)) {
+				return a;
+			}
+		}
+		return null;
+	}
+
 	public boolean anhadeAlarma(Alarma a) {
 		alarmasActivas.add(a);
+
 		return false;
 	}
-	public boolean eliminaAlarma() {
-		return false;
+
+	public boolean eliminaAlarma(Alarma a) {
+		return alarmasActivadas.remove(a) || alarmasDesactivadas.remove(a); //false si no se encontraba en ninguna de las listas
 	}
+
 	public Alarma alarmaMasProxima() {
-		return null;
+		return alarmasActivas.peek();
 	}
 
 	Alarma activaAlarma(Alarma a) {
 		alarmasDesactivadas.remove(a);
 		alarmasActivas.add(a);
+	}
+
+	public void desactivaAlarma(Alarma a) {
+		alarmasActivadas.remove(a);
+		alarmasDesactivadas.add(a);
 	}
 
 	public Alarma[] alarmasActivadas(){
@@ -38,7 +60,7 @@ public class Alarmas {
 	public Alarma[] alarmasDesactivadas(){
 		return alarmasDesactivadas.toArray();
 	}
-
+	
 	public Alarma activarMelodia() {
 		Alarma a = alarmasActivadas.poll();
 
@@ -49,29 +71,24 @@ public class Alarmas {
 		
 	}
 
-	public void NuevaAlarma() {
-		state.entryAction();
-		state.NuevaAlarma();
+	public void NuevaAlarma(Alarma a) {
+		state.NuevaAlarma(this, a);
 	}
 
 	public void Apagar() {
-		state.entryAction();
-		state.Apagar();
+		state.Apagar(this);
 	}
 
-	public void AlarmaOff() {
-		state.entryAction();
-		state.AlarmaOff();
+	public void AlarmaOff(Alarma a) {
+		state.AlarmaOff(this, a);
 	}
 
-	public void AlarmaOn() {
-		state.entryAction();
-		state.AlarmaOn();
+	public void AlarmaOn(Alarma a) {
+		state.AlarmaOn(this);
 	}
 	
-	public void BorraAlarma() {
-		state.entryAction();
-		state.BorraAlarma();
+	public void BorraAlarma(Alarma a) {
+		state.BorraAlarma(this, a);
 	}
 
 	public void setState(AlarmasState state) {
