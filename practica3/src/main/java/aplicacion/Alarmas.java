@@ -1,12 +1,23 @@
 package aplicacion;
 
+import Estados.*;
+
 public class Alarmas {
 	
-	Alarma alarmas[];
-	
-	
-	void anhadeAlarma(Alarma a) {
-		
+	/*Atributos*/
+	AlarmasState state; 
+	Queue<Alarma> alarmasActivas = new Queue<Alarma>();
+	ArrayList<Alarma> alarmasDesaactivadas = new ArrayList<Alarma>();
+
+	/*Constructor */
+	public Alarmas(AlarmasState state) {
+		this.state = state;
+	};
+
+	/*Métodos*/
+	public boolean anhadeAlarma(Alarma a) {
+		alarmasActivas.add(a);
+		return false;
 	}
 	public boolean eliminaAlarma() {
 		return false;
@@ -14,35 +25,56 @@ public class Alarmas {
 	public Alarma alarmaMasProxima() {
 		return null;
 	}
-	void activaAlarma(Alarma a) {
-		
+
+	Alarma activaAlarma(Alarma a) {
+		alarmasDesactivadas.remove(a);
+		alarmasActivas.add(a);
 	}
+
 	public Alarma[] alarmasActivadas(){
-		return null;
+		return alarmasActivadas.toArray();
 	}
+
 	public Alarma[] alarmasDesactivadas(){
-		return null;
+		return alarmasDesactivadas.toArray();
 	}
-	void activarMelodia() {
+
+	public Alarma activarMelodia() {
+		Alarma a = alarmasActivadas.poll();
+
+		return a;
+	}
+
+	public Alarma desactivarMelodia() {
 		
 	}
-	void desactivarMelodia() {
-		
+
+	public void NuevaAlarma() {
+		state.entryAction();
+		state.NuevaAlarma();
 	}
-	void NuevaAlarma() {
-		
+
+	public void Apagar() {
+		state.entryAction();
+		state.Apagar();
 	}
-	void Apagar() {
-		
+
+	public void AlarmaOff() {
+		state.entryAction();
+		state.AlarmaOff();
 	}
-	void AlarmaOff() {
-		
-	}
-	void AlarmaOn() {
-		
-	}
-	void BorraAlarma() {
-		
+
+	public void AlarmaOn() {
+		state.entryAction();
+		state.AlarmaOn();
 	}
 	
+	public void BorraAlarma() {
+		state.entryAction();
+		state.BorraAlarma();
+	}
+
+	public void setState(AlarmasState state) {
+		this.state = state;
+	}
 }
