@@ -1,6 +1,7 @@
 package Aplicacion;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -58,12 +59,12 @@ public class Alarmas {
 		alarmasDesactivadas.add(a);
 	}
 
-	public Alarma[] alarmasActivadas(){
-		return (Alarma[]) alarmasActivas.toArray();
+	public Collection<Alarma> alarmasActivadas(){
+		return alarmasActivas;
 	}
 
-	public Alarma[] alarmasDesactivadas(){
-		return (Alarma[]) alarmasDesactivadas.toArray();
+	public Collection<Alarma> alarmasDesactivadas(){
+		return alarmasDesactivadas;
 	}
 	
 	public Alarma activarMelodia() {

@@ -9,8 +9,7 @@ public abstract class AlarmasState {
 	static AlarmasState desprogramado = new Desprogramado();
 	static AlarmasState sonando = new Sonando();
 
-	/* Constructor que retorna la clase incial */
-	public AlarmasState AlarmasState()
+	public static AlarmasState AlarmasState()
 	{
 		return desprogramado; //Estado inicial
 	};
