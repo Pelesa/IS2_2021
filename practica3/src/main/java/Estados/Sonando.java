@@ -1,6 +1,6 @@
-package aplicacion;
-
-public Class Sonando extends AlarmasState {
+package Estados;
+import Aplicacion.*;
+public class Sonando extends AlarmasState {
 
 	/*Métodos*/
 	public void Apagar(Alarmas context)

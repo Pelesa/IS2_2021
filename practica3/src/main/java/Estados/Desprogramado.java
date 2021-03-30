@@ -1,6 +1,6 @@
-package aplicacion;
-
-public Class Desprogramado extends AlarmasState {
+package Estados;
+import Aplicacion.*;
+public class Desprogramado extends AlarmasState {
 
 	/*Métodos*/
 	public void NuevaAlarma(Alarmas context, Alarma a)

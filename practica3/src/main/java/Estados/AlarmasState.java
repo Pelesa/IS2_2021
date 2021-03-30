@@ -2,13 +2,12 @@ package Estados;
 
 import Aplicacion.*;
 
-public abstract Class AlarmasState
-{	
+public abstract class AlarmasState {	
 	/* Atributos */
 	/* Instancias */
-	AlarmasState programado = new Programdo();
-	AlarmasState desprogramado = new Desprogramado();
-	AlarmasState sonando = new Sonando();
+	static AlarmasState programado = new Programado();
+	static AlarmasState desprogramado = new Desprogramado();
+	static AlarmasState sonando = new Sonando();
 
 	/* Constructor que retorna la clase incial */
 	public AlarmasState AlarmasState()
@@ -17,13 +16,19 @@ public abstract Class AlarmasState
 	};
 
 	/*Métodos*/
-	public void NuevaAlarma(AlarmasState context, Alarma a) {};	
+	public void NuevaAlarma(Alarmas context, Alarma a) {};	
 
-	public void Apagar(AlarmasState context) {};
+	public void Apagar(Alarmas context) {};
 
-	public void AlarmaOff(AlarmasState context, Alarma a) {};
+	public void AlarmaOff(Alarmas context, Alarma a) {};
 
-	public void AlarmaOn(AlarmasState context, Alarma a) {};
+	public void AlarmaOn(Alarmas context, Alarma a) {};
 	
-	public void BorraAlarma(AlarmasState context, Alarma a) {};
+	public void BorraAlarma(Alarmas context, Alarma a) {};
+	
+	public void entryAction(Alarmas context) {};
+	
+	public void doAction(Alarmas context) {};
+	
+	public void exitAction(Alarmas context) {};
 } 

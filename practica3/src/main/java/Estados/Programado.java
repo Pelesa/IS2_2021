@@ -1,6 +1,6 @@
-package aplicacion;
-
-public Class Programado extends AlarmasState {
+package Estados;
+import Aplicacion.*;
+public class Programado extends AlarmasState {
 
 	/*Métodos*/
 	public void NuevaAlarma(Alarmas context, Alarma a)
@@ -14,7 +14,7 @@ public Class Programado extends AlarmasState {
 		programado.doAction(context);
 	};	
 
-	public void AlarmaOn(Alarmas context, Alarma a)
+	public void AlarmaOff(Alarmas context, Alarma a)
 	{
 		this.exitAction(context);
 		context.setState(programado);

@@ -1,4 +1,8 @@
-package aplicacion;
+package Aplicacion;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import Estados.*;
 
@@ -6,7 +10,7 @@ public class Alarmas {
 	
 	/*Atributos*/
 	AlarmasState state;
-	Queue<Alarma> alarmasActivas = new Queue<Alarma>();
+	Queue<Alarma> alarmasActivas = new LinkedList<Alarma>();
 	ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 
 	/*Constructor */
@@ -36,39 +40,40 @@ public class Alarmas {
 	}
 
 	public boolean eliminaAlarma(Alarma a) {
-		return alarmasActivadas.remove(a) || alarmasDesactivadas.remove(a); //false si no se encontraba en ninguna de las listas
+		return alarmasActivas.remove(a) || alarmasDesactivadas.remove(a); //false si no se encontraba en ninguna de las listas
 	}
 
 	public Alarma alarmaMasProxima() {
 		return alarmasActivas.peek();
 	}
 
-	Alarma activaAlarma(Alarma a) {
+	public Alarma activaAlarma(Alarma a) {
 		alarmasDesactivadas.remove(a);
 		alarmasActivas.add(a);
+		return a;
 	}
 
 	public void desactivaAlarma(Alarma a) {
-		alarmasActivadas.remove(a);
+		alarmasActivas.remove(a);
 		alarmasDesactivadas.add(a);
 	}
 
 	public Alarma[] alarmasActivadas(){
-		return alarmasActivadas.toArray();
+		return (Alarma[]) alarmasActivas.toArray();
 	}
 
 	public Alarma[] alarmasDesactivadas(){
-		return alarmasDesactivadas.toArray();
+		return (Alarma[]) alarmasDesactivadas.toArray();
 	}
 	
 	public Alarma activarMelodia() {
-		Alarma a = alarmasActivadas.poll();
+		Alarma a = alarmasActivas.poll();
 
 		return a;
 	}
 
 	public Alarma desactivarMelodia() {
-		
+		return null;
 	}
 
 	public void NuevaAlarma(Alarma a) {
@@ -84,7 +89,7 @@ public class Alarmas {
 	}
 
 	public void AlarmaOn(Alarma a) {
-		state.AlarmaOn(this);
+		state.AlarmaOn(this, a);
 	}
 	
 	public void BorraAlarma(Alarma a) {
