@@ -16,7 +16,7 @@
 					<archive>
 						<manifest>
 							<mainClass>
-								Main
+								alarmaGUI.VentanaPrincipal
 							</mainClass>
 						</manifest>
 					</archive>

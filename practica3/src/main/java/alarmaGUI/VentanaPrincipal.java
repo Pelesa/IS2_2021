@@ -2,6 +2,7 @@ package alarmaGUI;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -13,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 
 import javax.swing.JList;
@@ -22,11 +25,18 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
+import Aplicacion.*;
 
 public class VentanaPrincipal {
 
 	private JFrame frame;
-
+	private Alarmas context;
+	
+	/*Atributes*/
+	JLabel lblHoraAlarma;
+	JSpinner timeSpinner;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -103,13 +113,13 @@ public class VentanaPrincipal {
 		panelLeft.add(panelHoraAlarma);
 		panelHoraAlarma.setLayout(null);
 		
-		JLabel lblHoraAlarma = new JLabel("Hora Alarma");
+		lblHoraAlarma = new JLabel("Hora Alarma");
 		lblHoraAlarma.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblHoraAlarma.setBounds(12, 12, 102, 29);
 		panelHoraAlarma.add(lblHoraAlarma);
 		
 		
-		JSpinner timeSpinner = new JSpinner( new SpinnerDateModel() );
+		timeSpinner = new JSpinner( new SpinnerDateModel() );
 		JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm");
 		timeSpinner.setEditor(timeEditor);
 		timeSpinner.setValue(new Date()); 
@@ -118,6 +128,12 @@ public class VentanaPrincipal {
 		
 		JButton btnNuevaAlarma = new JButton("Nueva Alarma");
 		btnNuevaAlarma.setBounds(49, 179, 210, 22);
+		btnNuevaAlarma.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				context.NuevaAlarma(new Alarma(lblHoraAlarma.getText(), (Date) timeSpinner.getValue()));
+			}
+		});
 		panelLeft.add(btnNuevaAlarma);
 		
 		JButton btnApagar = new JButton("APAGAR");
