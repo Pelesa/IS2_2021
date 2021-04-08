@@ -1,5 +1,5 @@
-package Estados;
-import Aplicacion.*;
+package estados;
+import aplicacion.*;
 public class Sonando extends AlarmasState {
 
 	/*Métodos*/

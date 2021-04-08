@@ -1,11 +1,11 @@
-package Aplicacion;
+package aplicacion;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import Estados.*;
+import estados.*;
 
 public class Alarmas {
 	
@@ -35,9 +35,7 @@ public class Alarmas {
 	}
 
 	public boolean anhadeAlarma(Alarma a) {
-		alarmasActivas.add(a);
-
-		return false;
+		return alarmasActivas.add(a);
 	}
 
 	public boolean eliminaAlarma(Alarma a) {

@@ -1,6 +1,6 @@
-package Estados;
+package estados;
 
-import Aplicacion.*;
+import aplicacion.*;
 
 public abstract class AlarmasState {	
 	/* Atributos */

@@ -1,4 +1,4 @@
-package main.java.aplicacion;
+package aplicacion;
 
 import java.awt.EventQueue;
 
