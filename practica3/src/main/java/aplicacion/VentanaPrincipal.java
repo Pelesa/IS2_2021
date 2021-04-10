@@ -17,23 +17,54 @@ import java.util.Date;
 
 import javax.swing.JList;
 import java.awt.Color;
+import java.awt.Component;
+
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
+
+import estados.*;
+
 
 public class VentanaPrincipal {
 
 	private JFrame frame;
+	
+	private static Alarmas alarmas;
+	
+	private static DefaultListModel<Alarma> modelActivas;
+	private static DefaultListModel<Alarma> modelDesactivadas;
+	private static JList<Alarma> alarmasActivasList;
+	private static JList<Alarma> alarmasDesactivadasList;
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		Alarmas context = new Alarmas(AlarmasState.AlarmasState());
+
+		//ArrayList<Alarma> as = new ArrayList<Alarma>();
+
+		Alarma a = new Alarma ("A1", null);
+		Alarma b = new Alarma ("A2", null);
+		context.NuevaAlarma(a);
+		context.AlarmaOff(a);
+		context.NuevaAlarma(b);
+		
+		System.out.println(a);
+		System.out.println(a);
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					colocaAlarmas();
 					VentanaPrincipal window = new VentanaPrincipal();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -133,9 +164,11 @@ public class VentanaPrincipal {
 		panelAlarmasActivas.setBounds(0, 0, 275, 149);
 		panelRight.add(panelAlarmasActivas);
 		
+		colocaAlarmas();
+		
 		JLabel lblAlarmasActivas = new JLabel("Alarmas Activas");
 		
-		JList alarmasActivasList = new JList();
+		alarmasActivasList = new JList<Alarma>(modelActivas = new DefaultListModel<Alarma>());
 		GroupLayout gl_panelAlarmasActivas = new GroupLayout(panelAlarmasActivas);
 		gl_panelAlarmasActivas.setHorizontalGroup(
 			gl_panelAlarmasActivas.createParallelGroup(Alignment.LEADING)
@@ -159,6 +192,8 @@ public class VentanaPrincipal {
 		);
 		panelAlarmasActivas.setLayout(gl_panelAlarmasActivas);
 		
+		colocaAlarmas();
+		
 		JPanel panelAlarmasDesactivadas = new JPanel();
 		panelAlarmasDesactivadas.setBounds(0, 161, 275, 204);
 		panelRight.add(panelAlarmasDesactivadas);
@@ -168,7 +203,7 @@ public class VentanaPrincipal {
 		lblAlarmasDesactivadas.setBounds(59, 12, 156, 15);
 		panelAlarmasDesactivadas.add(lblAlarmasDesactivadas);
 		
-		JList alarmasDesactivadasList = new JList();
+		alarmasDesactivadasList =  new JList<Alarma>(modelDesactivadas = new DefaultListModel<Alarma>());
 		alarmasDesactivadasList.setBounds(39, 32, 176, 85);
 		panelAlarmasDesactivadas.add(alarmasDesactivadasList);
 		
@@ -183,5 +218,32 @@ public class VentanaPrincipal {
 		JButton btnOn = new JButton("ON");
 		btnOn.setBounds(141, 130, 117, 25);
 		panelAlarmasDesactivadas.add(btnOn);
+		
+		alarmasActivasList.setCellRenderer(getCellRenderer());
+		
+		
 	}
+	
+	private ListCellRenderer<? super Alarma> getCellRenderer() {
+	        return new DefaultListCellRenderer(){
+	            @Override
+	            public Component getListCellRendererComponent(JList<?> list,
+	                    Object value, int index, boolean isSelected,
+	                    boolean cellHasFocus) {
+	                Alarma a = (Alarma) value;
+	                Component listCellRendererComponent = super.getListCellRendererComponent(list, a.toString(), index, isSelected,cellHasFocus);
+	                return listCellRendererComponent;
+	            }
+	        };
+	}
+	private static void colocaAlarmas() {
+		
+		for (Alarma item: alarmas.alarmasActivadas()) {
+			modelActivas.addElement(item);
+		}
+		for (Alarma item: alarmas.alarmasDesactivadas()) {
+			modelDesactivadas.addElement(item);
+		}
+	}
+	
 }
