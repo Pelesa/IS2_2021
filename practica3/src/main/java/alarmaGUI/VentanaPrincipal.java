@@ -54,6 +54,7 @@ public class VentanaPrincipal {
 	private Timer timerAlarma = new Timer();
 	private SonidoAlarma timerTask = new SonidoAlarma();
 	private boolean hayAlarmaProgramada = false;
+	private boolean sonando = false;
 
 	/**
 	 * Launch the application.
@@ -163,7 +164,9 @@ public class VentanaPrincipal {
 		btnApagar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				timerTask.apaga();
+				if (sonando) {
+					timerTask.apaga();
+				}
 			}
 		});
 		panelLeft.add(btnApagar);
@@ -214,7 +217,9 @@ public class VentanaPrincipal {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Alarma a = alarmasDesactivadasList.getSelectedValue();
+				Alarma b = alarmasActivasList.getSelectedValue();
 				alarmas.BorraAlarma(a);
+				alarmas.BorraAlarma(b);
 				actualizaAlarmas();
 			}
 		});
@@ -268,6 +273,7 @@ public class VentanaPrincipal {
 	}
 
 	private void actualizaAlarmas() {
+		desprogramaTimer();
 		actualizaAlarmasActivas();
 		actualizaAlarmasDesactivadas();
 	}
@@ -281,12 +287,20 @@ public class VentanaPrincipal {
 	} 
 
 	private void programaTimer() {
-		//programar timer alarma mas proxima
-		//bool de control 
+		Alarma a = alarmas.alarmaMasProxima();
+		if(!hayAlarmaProgramada && a != null) {
+			timerTask.anhadeAlarma(a);
+			timerAlarma.purge();
+			timerAlarma.schedule(timerTask, timerTask.alarma.hora());
+			hayAlarmaProgramada = true;
+		}
 	} 
 
 	private void desprogramaTimer() {
-
+		timerTask = null;
+		timerTask = new SonidoAlarma();
+		hayAlarmaProgramada = false;
+		programaTimer(); //Mira si hay alarmas en la cola, sino no hace nada
 	}
 
 	private class SonidoAlarma extends TimerTask {
@@ -302,12 +316,16 @@ public class VentanaPrincipal {
 		@Override
 		public void run() {
 			alarmas.BorraAlarma(alarma);
+			sonando = true;
 			System.out.println("Sonando alarma: " + alarma.toString());
+			actualizaAlarmas();
 			t.schedule(endTimer, Alarmas.INTERVALO_SONAR);
 		}
 
 		public void apaga() {
+			sonando = false;
 			System.out.println("Apagada alarma: " + alarma.toString());
+			endTimer = null;
 			desprogramaTimer();
 		}
 	}

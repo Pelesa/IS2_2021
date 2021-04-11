@@ -2,7 +2,7 @@ package estados;
 import aplicacion.*;
 public class Sonando extends AlarmasState {
 
-	/*Métodos*/
+	/* Metodos */
 	public void Apagar(Alarmas context)
 	{
 		this.exitAction(context);

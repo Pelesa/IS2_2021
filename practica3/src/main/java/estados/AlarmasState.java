@@ -14,7 +14,7 @@ public abstract class AlarmasState {
 		return desprogramado; //Estado inicial
 	};
 
-	/*Métodos*/
+	/* Metodos */
 	public void NuevaAlarma(Alarmas context, Alarma a) {};	
 
 	public void Apagar(Alarmas context) {};

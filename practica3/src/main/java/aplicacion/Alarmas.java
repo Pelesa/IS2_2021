@@ -9,20 +9,20 @@ import java.util.Queue;
 import estados.*;
 
 public class Alarmas {
-	
+
 	/*Atributos*/
 	AlarmasState state;
 	PriorityQueue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
 	ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 
-	public static final  int INTERVALO_SONAR = 100;
-	
+	public static final  int INTERVALO_SONAR = 3000; //3000ms = 3segundos sonando la alarma
+
 	/*Constructor */
 	public Alarmas(AlarmasState state) {
 		this.state = state;
 	};
 
-	/*Métodos*/
+	/* Metodos*/
 	public Alarma alarma(String id) {
 		for (Alarma a : alarmasActivas) {
 			if(a.toString().equals(id)) {
@@ -46,7 +46,11 @@ public class Alarmas {
 	}
 
 	public Alarma alarmaMasProxima() {
-		return alarmasActivas.peek();
+		/*
+		 * Si se usa para que suene se borra en ese momento, por ello usamos peek, 
+		 * para poder ver la cabeza de la cola sin eliminar el elemento.
+		 * */
+		return alarmasActivas.peek(); 
 	}
 
 	public Alarma activaAlarma(Alarma a) {
@@ -67,7 +71,7 @@ public class Alarmas {
 	public Collection<Alarma> alarmasDesactivadas(){
 		return alarmasDesactivadas;
 	}
-	
+
 	public Alarma activarMelodia() {
 		Alarma a = alarmasActivas.poll();
 
@@ -79,7 +83,9 @@ public class Alarmas {
 	}
 
 	public void NuevaAlarma(Alarma a) {
-		state.NuevaAlarma(this, a);
+		if (!(state instanceof Sonando)) {
+			state.NuevaAlarma(this, a);
+		}
 	}
 
 	public void Apagar() {
@@ -87,15 +93,21 @@ public class Alarmas {
 	}
 
 	public void AlarmaOff(Alarma a) {
-		state.AlarmaOff(this, a);
+		if (!(state instanceof Sonando)) {
+			state.AlarmaOff(this, a);
+		}
 	}
 
 	public void AlarmaOn(Alarma a) {
-		state.AlarmaOn(this, a);
+		if (!(state instanceof Sonando)) {
+			state.AlarmaOn(this, a);
+		}
 	}
-	
+
 	public void BorraAlarma(Alarma a) {
-		state.BorraAlarma(this, a);
+		if (!(state instanceof Sonando)) {
+			state.BorraAlarma(this, a);
+		}
 	}
 
 	public void setState(AlarmasState state) {

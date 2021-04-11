@@ -13,7 +13,8 @@ public class Alarma implements Comparable<Alarma>{
 		this.id=id;
 		this.hora=hora;
 	}
-
+	
+	/* Metodos */
 	public String id() { 
 		return id; 
 	}
