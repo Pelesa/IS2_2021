@@ -3,6 +3,7 @@ package aplicacion;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 import estados.*;
@@ -11,7 +12,7 @@ public class Alarmas {
 	
 	/*Atributos*/
 	AlarmasState state;
-	Queue<Alarma> alarmasActivas = new LinkedList<Alarma>();
+	PriorityQueue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
 	ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 
 	public static final  int INTERVALO_SONAR = 100;

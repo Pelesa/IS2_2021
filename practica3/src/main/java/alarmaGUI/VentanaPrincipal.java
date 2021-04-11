@@ -139,7 +139,7 @@ public class VentanaPrincipal {
 
 
 		timeSpinner = new JSpinner( new SpinnerDateModel() );
-		JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm");
+		JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "dd-MM-yyyy HH:mm:ss");
 		timeSpinner.setEditor(timeEditor);
 		timeSpinner.setValue(new Date()); 
 		timeSpinner.setBounds(149, 0, 148, 41);
@@ -152,7 +152,7 @@ public class VentanaPrincipal {
 			public void mouseClicked(MouseEvent e) {
 				Alarma a = new Alarma(txtpIDalarma.getText(), (Date)timeSpinner.getValue());
 				alarmas.NuevaAlarma(a);
-				actualizaAlarmasActivas();
+				actualizaAlarmas();
 				programaTimer();
 			}
 		});
@@ -174,11 +174,10 @@ public class VentanaPrincipal {
 		panelRight.setLayout(null);
 
 		JLabel lblAlarmasActivas = new JLabel("Alarmas Activas");
-
 		alarmasActivasList = new JList<Alarma>();
 		alarmasActivasList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-		modeloActivas = new DefaultListModel();
+		modeloActivas = new DefaultListModel<Alarma>();
 
 		scrollListaActivas = new JScrollPane();
 		scrollListaActivas.setViewportView(alarmasActivasList);
@@ -200,7 +199,7 @@ public class VentanaPrincipal {
 		alarmasDesactivadasList = new JList<Alarma>();
 		alarmasDesactivadasList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-		modeloDesactivadas = new DefaultListModel();
+		modeloDesactivadas = new DefaultListModel<Alarma>();
 
 		scrollListaDesactivadas = new JScrollPane();
 		scrollListaDesactivadas.setViewportView(alarmasDesactivadasList);
@@ -216,7 +215,7 @@ public class VentanaPrincipal {
 			public void mouseClicked(MouseEvent e) {
 				Alarma a = alarmasDesactivadasList.getSelectedValue();
 				alarmas.BorraAlarma(a);
-				actualizaAlarmasDesactivadas();
+				actualizaAlarmas();
 			}
 		});
 		panelDesactivadas.add(btnEliminar);
@@ -228,8 +227,7 @@ public class VentanaPrincipal {
 			public void mouseClicked(MouseEvent e) {
 				Alarma a = alarmasActivasList.getSelectedValue();
 				alarmas.AlarmaOff(a);
-				actualizaAlarmasActivas();
-				actualizaAlarmasDesactivadas();
+				actualizaAlarmas();
 			}
 		});
 		panelDesactivadas.add(btnOff);
@@ -241,8 +239,7 @@ public class VentanaPrincipal {
 			public void mouseClicked(MouseEvent e) {
 				Alarma a = alarmasDesactivadasList.getSelectedValue();
 				alarmas.AlarmaOn(a);
-				actualizaAlarmasActivas();
-				actualizaAlarmasDesactivadas();
+				actualizaAlarmas();
 				programaTimer();			
 			}
 		});
@@ -270,6 +267,11 @@ public class VentanaPrincipal {
 		alarmasDesactivadasList.setModel(modeloDesactivadas);
 	}
 
+	private void actualizaAlarmas() {
+		actualizaAlarmasActivas();
+		actualizaAlarmasDesactivadas();
+	}
+
 	private void borraListaActivas() {
 		modeloActivas.clear();
 	}
@@ -284,7 +286,7 @@ public class VentanaPrincipal {
 	} 
 
 	private void desprogramaTimer() {
-		
+
 	}
 
 	private class SonidoAlarma extends TimerTask {
@@ -309,15 +311,15 @@ public class VentanaPrincipal {
 			desprogramaTimer();
 		}
 	}
-	
+
 	private class ApagaAlarma extends TimerTask {
-		
+
 		private SonidoAlarma s = null;
-		
+
 		public ApagaAlarma(SonidoAlarma s) {
 			this.s = s;
 		}
-		
+
 		@Override
 		public void run() {
 			s.apaga();
