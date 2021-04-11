@@ -279,7 +279,8 @@ public class VentanaPrincipal {
 	} 
 
 	private void programaTimer() {
-		
+		//programar timer alarma mas proxima
+		//bool de control 
 	} 
 
 	private void desprogramaTimer() {
@@ -288,31 +289,38 @@ public class VentanaPrincipal {
 
 	private class SonidoAlarma extends TimerTask {
 		Alarma alarma = null;
-
+		Timer t = new Timer();
+		ApagaAlarma endTimer = new ApagaAlarma(this);
 		public SonidoAlarma() {}
 
 		public void anhadeAlarma(Alarma a) {
-			this.alarma = a;
+			alarma = a;
 		} 
 
 		@Override
 		public void run() {
-			
+			alarmas.BorraAlarma(alarma);
+			System.out.println("Sonando alarma: " + alarma.toString());
+			t.schedule(endTimer, Alarmas.INTERVALO_SONAR);
 		}
 
 		public void apaga() {
-			
+			System.out.println("Apagada alarma: " + alarma.toString());
+			desprogramaTimer();
 		}
 	}
 	
 	private class ApagaAlarma extends TimerTask {
 		
-		public ApagaAlarma() {}
+		private SonidoAlarma s = null;
+		
+		public ApagaAlarma(SonidoAlarma s) {
+			this.s = s;
+		}
 		
 		@Override
 		public void run() {
-			
-		}
-		
+			s.apaga();
+		}	
 	}
 }
