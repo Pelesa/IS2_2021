@@ -14,6 +14,8 @@ public class Alarmas {
 	Queue<Alarma> alarmasActivas = new LinkedList<Alarma>();
 	ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 
+	public static final  int INTERVALO_SONAR = 100;
+	
 	/*Constructor */
 	public Alarmas(AlarmasState state) {
 		this.state = state;

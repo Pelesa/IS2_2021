@@ -8,20 +8,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JSplitPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
-import java.awt.GridLayout;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.temporal.TemporalAmount;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JList;
-import java.awt.Color;
-
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -52,6 +51,9 @@ public class VentanaPrincipal {
 	private JTextPane txtpIDalarma;
 	private JSpinner timeSpinner;
 
+	private Timer timerAlarma = new Timer();
+	private SonidoAlarma timerTask = new SonidoAlarma();
+	private boolean hayAlarmaProgramada = false;
 
 	/**
 	 * Launch the application.
@@ -151,12 +153,19 @@ public class VentanaPrincipal {
 				Alarma a = new Alarma(txtpIDalarma.getText(), (Date)timeSpinner.getValue());
 				alarmas.NuevaAlarma(a);
 				actualizaAlarmasActivas();
+				programaTimer();
 			}
 		});
 		panelLeft.add(btnNuevaAlarma);
 
 		JButton btnApagar = new JButton("APAGAR");
 		btnApagar.setBounds(49, 328, 210, 25);
+		btnApagar.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				timerTask.apaga();
+			}
+		});
 		panelLeft.add(btnApagar);
 
 		JPanel panelRight = new JPanel();
@@ -168,12 +177,12 @@ public class VentanaPrincipal {
 
 		alarmasActivasList = new JList<Alarma>();
 		alarmasActivasList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		
+
 		modeloActivas = new DefaultListModel();
-		
+
 		scrollListaActivas = new JScrollPane();
 		scrollListaActivas.setViewportView(alarmasActivasList);
-		
+
 		JPanel panelActivas = new JPanel();
 		panelActivas.setBounds(0, 0, 275, 149);
 		panelActivas.add(lblAlarmasActivas);
@@ -182,7 +191,7 @@ public class VentanaPrincipal {
 
 		JPanel panelDesactivadas = new JPanel();
 		panelDesactivadas.setBounds(0, 161, 275, 204);
-		
+
 
 		JLabel lblAlarmasDesactivadas = new JLabel("Alarmas Desactivadas");
 		lblAlarmasDesactivadas.setBounds(59, 12, 156, 15);
@@ -190,16 +199,16 @@ public class VentanaPrincipal {
 
 		alarmasDesactivadasList = new JList<Alarma>();
 		alarmasDesactivadasList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		
+
 		modeloDesactivadas = new DefaultListModel();
-		
+
 		scrollListaDesactivadas = new JScrollPane();
 		scrollListaDesactivadas.setViewportView(alarmasDesactivadasList);
-		
+
 		panelDesactivadas.add(lblAlarmasDesactivadas);
 		panelDesactivadas.add(scrollListaDesactivadas);
 		panelRight.add(panelDesactivadas);
-		
+
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(80, 167, 117, 25);
 		btnEliminar.addMouseListener(new MouseAdapter() {
@@ -234,6 +243,7 @@ public class VentanaPrincipal {
 				alarmas.AlarmaOn(a);
 				actualizaAlarmasActivas();
 				actualizaAlarmasDesactivadas();
+				programaTimer();			
 			}
 		});
 		panelDesactivadas.add(btnOn);
@@ -247,8 +257,9 @@ public class VentanaPrincipal {
 			i++;
 		}
 		alarmasActivasList.setModel(modeloActivas);
+
 	}
-	
+
 	private void actualizaAlarmasDesactivadas() {
 		int i = 0;
 		borraListaDesactivadas();
@@ -262,9 +273,46 @@ public class VentanaPrincipal {
 	private void borraListaActivas() {
 		modeloActivas.clear();
 	}
-	
+
 	private void borraListaDesactivadas() {
 		modeloDesactivadas.clear();
 	} 
+
+	private void programaTimer() {
+		
+	} 
+
+	private void desprogramaTimer() {
+		
+	}
+
+	private class SonidoAlarma extends TimerTask {
+		Alarma alarma = null;
+
+		public SonidoAlarma() {}
+
+		public void anhadeAlarma(Alarma a) {
+			this.alarma = a;
+		} 
+
+		@Override
+		public void run() {
+			
+		}
+
+		public void apaga() {
+			
+		}
+	}
 	
+	private class ApagaAlarma extends TimerTask {
+		
+		public ApagaAlarma() {}
+		
+		@Override
+		public void run() {
+			
+		}
+		
+	}
 }
