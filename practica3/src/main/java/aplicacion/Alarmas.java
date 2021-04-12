@@ -15,7 +15,7 @@ public class Alarmas {
 	PriorityQueue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
 	ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 
-	public static final  int INTERVALO_SONAR = 3000; //3000ms = 3segundos sonando la alarma
+	public static final  int INTERVALO_SONAR = 10000; //10000ms = 10segundos sonando la alarma
 
 	/*Constructor */
 	public Alarmas(AlarmasState state) {

@@ -16,14 +16,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerDateModel;
@@ -55,7 +61,19 @@ public class VentanaPrincipal {
 	private SonidoAlarma timerTask = new SonidoAlarma();
 	private boolean hayAlarmaProgramada = false;
 	private boolean sonando = false;
-
+	
+	
+	//Botones
+	JButton btnNuevaAlarma;
+	JButton btnApagar;
+	JButton btnEliminar;
+	JButton btnOff;
+	JButton btnOn;
+	
+	//Imagenes
+//	BufferedImage relojImg;
+//	BufferedImage alarmaImg;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -77,6 +95,7 @@ public class VentanaPrincipal {
 	 * Create the application.
 	 */
 	public VentanaPrincipal() {
+		//getImages();
 		initialize();
 	}
 
@@ -146,7 +165,7 @@ public class VentanaPrincipal {
 		timeSpinner.setBounds(149, 0, 148, 41);
 		panelHoraAlarma.add(timeSpinner);
 
-		JButton btnNuevaAlarma = new JButton("Nueva Alarma");
+		btnNuevaAlarma = new JButton("Nueva Alarma");
 		btnNuevaAlarma.setBounds(49, 179, 210, 22);
 		btnNuevaAlarma.addMouseListener(new MouseAdapter() {
 			@Override
@@ -159,7 +178,7 @@ public class VentanaPrincipal {
 		});
 		panelLeft.add(btnNuevaAlarma);
 
-		JButton btnApagar = new JButton("APAGAR");
+		btnApagar = new JButton("APAGAR");
 		btnApagar.setBounds(49, 328, 210, 25);
 		btnApagar.addActionListener(new ActionListener() {
 
@@ -170,6 +189,14 @@ public class VentanaPrincipal {
 			}
 		});
 		panelLeft.add(btnApagar);
+		
+//		JPanel panelImage = new JPanel();
+//		panelImage.setBounds(49, 212, 211, 105);
+//		panelLeft.add(panelImage);
+//		
+//		JLabel lblImage = new JLabel();
+//		lblImage.setIcon(new ImageIcon(getClass().getResource("reloj1.png")));
+//		panelImage.add(lblImage);
 
 		JPanel panelRight = new JPanel();
 		panelRight.setBounds(329, 5, 287, 365);
@@ -211,7 +238,7 @@ public class VentanaPrincipal {
 		panelDesactivadas.add(scrollListaDesactivadas);
 		panelRight.add(panelDesactivadas);
 
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(80, 167, 117, 25);
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -225,7 +252,8 @@ public class VentanaPrincipal {
 		});
 		panelDesactivadas.add(btnEliminar);
 
-		JButton btnOff = new JButton("OFF");
+		
+		btnOff = new JButton("OFF");
 		btnOff.setBounds(12, 130, 117, 25);
 		btnOff.addMouseListener(new MouseAdapter() {
 			@Override
@@ -236,8 +264,8 @@ public class VentanaPrincipal {
 			}
 		});
 		panelDesactivadas.add(btnOff);
-
-		JButton btnOn = new JButton("ON");
+		
+		btnOn = new JButton("ON");
 		btnOn.setBounds(141, 130, 117, 25);
 		btnOn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -320,12 +348,15 @@ public class VentanaPrincipal {
 			System.out.println("Sonando alarma: " + alarma.toString());
 			actualizaAlarmas();
 			t.schedule(endTimer, Alarmas.INTERVALO_SONAR);
+			activaBotones(false);
+			JOptionPane.showMessageDialog(null, "Sonando alarma: " + alarma.toString());
 		}
 
 		public void apaga() {
 			sonando = false;
 			System.out.println("Apagada alarma: " + alarma.toString());
 			endTimer = null;
+			activaBotones(true);
 			desprogramaTimer();
 		}
 	}
@@ -343,4 +374,25 @@ public class VentanaPrincipal {
 			s.apaga();
 		}	
 	}
+	
+	private void activaBotones(boolean activa) {
+		btnNuevaAlarma.setEnabled(activa);
+		btnEliminar.setEnabled(activa);
+		btnOff.setEnabled(activa);
+		btnOn.setEnabled(activa);
+	}
+	
+//	private void getImages() {
+//
+//        try {                  
+//        	relojImg = ImageIO.read(new File("\\reloj1.png"));
+//        	alarmaImg = ImageIO.read(new File("\\alarma1.png"));
+//        } catch (IOException e) {
+//            System.out.println("The image was not loaded.");
+//        }
+//		
+//	
+//		
+//	}
+	
 }
