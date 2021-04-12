@@ -73,8 +73,7 @@ public class Alarmas {
 	}
 
 	public Alarma activarMelodia() {
-		Alarma a = alarmasActivas.poll();
-
+		System.out.println("Sonando alarma: " + alarma.toString());
 		return a;
 	}
 

@@ -12,8 +12,9 @@ public class Sonando extends AlarmasState {
 		programado.doAction(context);
 	};
 
-	public void entryAction(Alarmas context)
+	public void entryAction(Alarmas context, Alarma a)
 	{
+		context.eliminaAlarma(a);
 		context.activarMelodia();
 	}
 

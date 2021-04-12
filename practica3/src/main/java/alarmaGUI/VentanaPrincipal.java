@@ -315,9 +315,10 @@ public class VentanaPrincipal {
 
 		@Override
 		public void run() {
+			alarmas.setState(new Sonando());
 			alarmas.BorraAlarma(alarma);
 			sonando = true;
-			System.out.println("Sonando alarma: " + alarma.toString());
+			
 			actualizaAlarmas();
 			t.schedule(endTimer, Alarmas.INTERVALO_SONAR);
 		}
