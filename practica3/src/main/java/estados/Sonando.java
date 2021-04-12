@@ -1,7 +1,9 @@
 package estados;
 import aplicacion.*;
 public class Sonando extends AlarmasState {
-
+	
+	Alarma alarma;
+	
 	/* Metodos */
 	public void Apagar(Alarmas context)
 	{
@@ -12,9 +14,8 @@ public class Sonando extends AlarmasState {
 		programado.doAction(context);
 	};
 
-	public void entryAction(Alarmas context, Alarma a)
+	public void entryAction(Alarmas context)
 	{
-		context.eliminaAlarma(a);
 		context.activarMelodia();
 	}
 

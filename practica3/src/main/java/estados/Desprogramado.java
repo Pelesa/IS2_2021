@@ -2,7 +2,7 @@ package estados;
 import aplicacion.*;
 public class Desprogramado extends AlarmasState {
 
-	/*Métodos*/
+	/* Metodos */
 	public void NuevaAlarma(Alarmas context, Alarma a)
 	{
 		this.exitAction(context);

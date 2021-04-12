@@ -30,4 +30,8 @@ public abstract class AlarmasState {
 	public void doAction(Alarmas context) {};
 	
 	public void exitAction(Alarmas context) {};
+	
+	public static AlarmasState sonando() {
+		return sonando;
+	}
 } 

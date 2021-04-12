@@ -2,27 +2,32 @@ package aplicacion;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.Queue;
+
 
 import estados.*;
 
 public class Alarmas {
 
-	/*Atributos*/
+	/* Atributos */
 	AlarmasState state;
 	PriorityQueue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
 	ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 
-	public static final  int INTERVALO_SONAR = 10000; //10000ms = 10segundos sonando la alarma
+	public static final  int INTERVALO_SONAR = 3*1000; //3 segundos sonando la alarma
 
-	/*Constructor */
+	/* Constructor */
 	public Alarmas(AlarmasState state) {
 		this.state = state;
 	};
 
 	/* Metodos*/
+	
+	/**
+	 * Método que busca una alarma en el sistema
+	 * @param id de la alarma buscada
+	 * @return la alarma si esta o null si no.
+	 */
 	public Alarma alarma(String id) {
 		for (Alarma a : alarmasActivas) {
 			if(a.toString().equals(id)) {
@@ -37,14 +42,28 @@ public class Alarmas {
 		return null;
 	}
 
+	/**
+	 * Anhade una alarma al sistema, por defecto esta activa
+	 * @param a alarma a anhadir
+	 * @return true si no ha habido fallo
+	 */
 	public boolean anhadeAlarma(Alarma a) {
 		return alarmasActivas.add(a);
 	}
 
+	/**
+	 * Anhade una alarma al sistema, por defecto esta activa
+	 * @param a alarma a anhadir
+	 * @return true si no ha habido fallo
+	 */
 	public boolean eliminaAlarma(Alarma a) {
 		return alarmasActivas.remove(a) || alarmasDesactivadas.remove(a); //false si no se encontraba en ninguna de las listas
 	}
 
+	/**
+	 * Devuelve la cabeza de la lista de alarmas activas
+	 * @return la cabeza de la lista de alarmas activas o null si no hay ninguna alarma
+	 */
 	public Alarma alarmaMasProxima() {
 		/*
 		 * Si se usa para que suene se borra en ese momento, por ello usamos peek, 
@@ -53,34 +72,65 @@ public class Alarmas {
 		return alarmasActivas.peek(); 
 	}
 
+	/**
+	 * Activa una alarma
+	 * @param a alarma a ser activada
+	 * @return la alarma en cuestion
+	 */
 	public Alarma activaAlarma(Alarma a) {
 		alarmasDesactivadas.remove(a);
 		alarmasActivas.add(a);
 		return a;
 	}
-
+	
+	/**
+	 * Desactiva una alarma
+	 * @param a alarma a ser desacctivada
+	 * @return la alarma en cuestion
+	 */
 	public void desactivaAlarma(Alarma a) {
 		alarmasActivas.remove(a);
 		alarmasDesactivadas.add(a);
+		if(alarmasActivas.size() == 0) {
+			setState(AlarmasState.AlarmasState()); //pasa a desporgramado
+		}
 	}
 
+	/**
+	 * Retorna las alarma activas en el sistema
+	 * @return Colletion con las alarmas activas
+	 */
 	public Collection<Alarma> alarmasActivadas(){
 		return alarmasActivas;
 	}
 
+	/**
+	 * Retorna las alarma desactivadas en el sistema
+	 * @return Colletion con las alarmas desactivadas
+	 */
 	public Collection<Alarma> alarmasDesactivadas(){
 		return alarmasDesactivadas;
 	}
 
-	public Alarma activarMelodia() {
-		System.out.println("Sonando alarma: " + alarma.toString());
-		return a;
+	/**
+	 * Implementa el sonido de la alarma
+	 */
+	public void activarMelodia() {
+		System.out.println("Sonando alarma: " + alarmaMasProxima().toString());
+		eliminaAlarma(alarmaMasProxima());
 	}
 
-	public Alarma desactivarMelodia() {
-		return null;
+	/**
+	 * Implementa la finalizacion del sonido de la alarma
+	 */
+	public void desactivarMelodia() {
+		System.out.println("Alarma desactivada");
 	}
 
+	/**
+	 * Señal NuevaAlarma
+	 * @param a alarma a anhadir
+	 */
 	public void NuevaAlarma(Alarma a) {
 		if (!(state instanceof Sonando)) {
 			state.NuevaAlarma(this, a);
@@ -111,5 +161,10 @@ public class Alarmas {
 
 	public void setState(AlarmasState state) {
 		this.state = state;
+	}
+	
+	public void sonando() {
+		setState(AlarmasState.sonando());
+		state.entryAction(this);
 	}
 }
