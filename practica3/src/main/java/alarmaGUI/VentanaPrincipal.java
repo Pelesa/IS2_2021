@@ -278,9 +278,9 @@ public class VentanaPrincipal {
 	 * Actualiza la visualizacion de las listas de alarmas, y asegura que la alarma programada sea la más cercana.
 	 */
 	private void actualizaAlarmas() {
-		actualizaAlarmasActivas();
-		actualizaAlarmasDesactivadas();
 		programaTimer();
+		actualizaAlarmasActivas(); //ACtualiza la view de las listas activas
+		actualizaAlarmasDesactivadas(); //ACtualiza la view de las listas desactivadas
 	}
 
 	/**

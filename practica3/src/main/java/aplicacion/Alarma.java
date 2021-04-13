@@ -28,6 +28,6 @@ public class Alarma implements Comparable<Alarma>{
 	}
 
 	public int compareTo(Alarma a) {
-		return this.hora().compareTo(a.hora());
+		return hora.compareTo(a.hora());
 	}
 }

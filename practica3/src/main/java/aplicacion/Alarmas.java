@@ -21,7 +21,7 @@ public class Alarmas {
 		this.state = state;
 	};
 
-	/* Metodos*/
+	/* Metodos */
 	
 	/**
 	 * Método que busca una alarma en el sistema
