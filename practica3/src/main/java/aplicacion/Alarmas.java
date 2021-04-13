@@ -14,7 +14,7 @@ public class Alarmas {
 	PriorityQueue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
 	ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 
-	public static final  int INTERVALO_SONAR = 3*1000; //3 segundos sonando la alarma
+	private static final  int INTERVALO_SONAR = 3*1000; //3 segundos sonando la alarma
 
 	/* Constructor */
 	public Alarmas(AlarmasState state) {
@@ -126,6 +126,10 @@ public class Alarmas {
 	public void desactivarMelodia() {
 		System.out.println("Alarma desactivada");
 	}
+	
+	public int intervaloSonar() {
+		return INTERVALO_SONAR;
+	} 
 
 	/**
 	 * Señal NuevaAlarma

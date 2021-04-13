@@ -301,7 +301,6 @@ public class VentanaPrincipal {
 	 * alarma suene.
 	 */
 	private class SonidoAlarma extends TimerTask {
-
 		Timer t = new Timer();
 		ApagaAlarma endTimer = new ApagaAlarma();
 		public SonidoAlarma() {} 
@@ -309,7 +308,7 @@ public class VentanaPrincipal {
 		@Override
 		public void run() {
 			alarmas.sonando();
-			t.schedule(endTimer, Alarmas.INTERVALO_SONAR);
+			t.schedule(endTimer, alarmas.intervaloSonar());
 		}
 
 		public void apaga() {
@@ -322,7 +321,6 @@ public class VentanaPrincipal {
 		 * de que se apague transcurrido el tiempo indicado en alarmas.INTERVALO_SONAR.
 		 */
 		private class ApagaAlarma extends TimerTask {
-
 			@Override
 			public void run() {
 				apaga();
