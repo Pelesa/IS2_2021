@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -54,6 +55,8 @@ public class VentanaPrincipal {
 
 	private Timer timerAlarma = new Timer();
 	private SonidoAlarma timerTask = null;
+	
+	private ArrayList<JButton> botones= new ArrayList<JButton>();;
 
 	/**
 	 * Launch the application.
@@ -146,6 +149,7 @@ public class VentanaPrincipal {
 		panelHoraAlarma.add(timeSpinner);
 
 		JButton btnNuevaAlarma = new JButton("Nueva Alarma");
+		botones.add(btnNuevaAlarma);
 		btnNuevaAlarma.setBounds(49, 179, 210, 22);
 		btnNuevaAlarma.addMouseListener(new MouseAdapter() {
 			@Override
@@ -209,6 +213,7 @@ public class VentanaPrincipal {
 		panelRight.add(panelDesactivadas);
 
 		JButton btnEliminar = new JButton("Eliminar");
+		botones.add(btnEliminar);
 		btnEliminar.setBounds(80, 167, 117, 25);
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -225,6 +230,7 @@ public class VentanaPrincipal {
 		panelDesactivadas.add(btnEliminar);
 
 		JButton btnOff = new JButton("OFF");
+		botones.add(btnOff);
 		btnOff.setBounds(12, 130, 117, 25);
 		btnOff.addMouseListener(new MouseAdapter() {
 			@Override
@@ -239,6 +245,7 @@ public class VentanaPrincipal {
 		panelDesactivadas.add(btnOff);
 
 		JButton btnOn = new JButton("ON");
+		botones.add(btnOn);
 		btnOn.setBounds(141, 130, 117, 25);
 		btnOn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -307,11 +314,13 @@ public class VentanaPrincipal {
 
 		@Override
 		public void run() {
+			muestraBotones(false);
 			alarmas.sonando();
 			t.schedule(endTimer, alarmas.intervaloSonar());
 		}
 
 		public void apaga() {
+			muestraBotones(true);
 			alarmas.Apagar();
 			actualizaAlarmas();
 		}
@@ -327,4 +336,12 @@ public class VentanaPrincipal {
 			}	
 		}
 	}	
+	
+	private void muestraBotones(boolean mostrar) {
+		
+		for(JButton b : botones) {
+			b.setEnabled(mostrar);
+		}
+	}
+	
 }
