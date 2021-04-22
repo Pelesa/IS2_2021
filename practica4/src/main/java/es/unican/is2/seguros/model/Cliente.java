@@ -1,6 +1,7 @@
 package es.unican.is2.seguros.model;
 
 public class Cliente {
+
 	private String nombre;
 	private String dni;
 	private boolean minusvalia;

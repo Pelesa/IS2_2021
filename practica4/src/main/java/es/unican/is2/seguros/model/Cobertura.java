@@ -18,6 +18,5 @@ public enum Cobertura {
 	
 	
 	
-	//Cobertura.valueOf
 }
 
