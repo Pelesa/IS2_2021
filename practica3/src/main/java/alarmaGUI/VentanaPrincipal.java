@@ -337,6 +337,9 @@ public class VentanaPrincipal {
 		}
 	}	
 	
+	/**
+	 * Oculta o muestra los botones dependiendo del parametro mandado
+	 */
 	private void muestraBotones(boolean mostrar) {
 		
 		for(JButton b : botones) {
