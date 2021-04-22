@@ -3,7 +3,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorde
+import javax.swing.border.EmptyBorder;
 
 import es.unican.is2.seguros.model.Cliente;
 import es.unican.is2.seguros.model.Cobertura;
@@ -91,9 +91,10 @@ public class SegurosGUI extends JFrame {
 			    	Seguro seguro = new Seguro(potencia, new Cliente("Pepe", "12345678A", minusvalia), cobertura);
 			    	precio = seguro.precio();
 			    	txtPrecio.setText(Double.toString(precio));
+			    	System.out.println(seguro.toString());
 			    	
-				} catch (DatoIncorrectoException e) {
-					txtPrecio.setText(Double.toString(precio));
+//				} catch (DatoIncorrectoException e) {
+//					txtPrecio.setText(Double.toString(precio));
 					
 				} catch (DateTimeParseException e) {
 					txtPrecio.setText("La fecha no se pudo parsear");
