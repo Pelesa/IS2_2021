@@ -19,6 +19,7 @@ public class Seguro {
 		
 	}
 	
+
 	public void setPrecio() {
 		double base=cobertura.getCosteBase();
 		double incPotencia;
@@ -63,4 +64,6 @@ public class Seguro {
 		fechaUltimoSiniestro=fecha;
 		setPrecio();
 	}
+	
+	
 }
