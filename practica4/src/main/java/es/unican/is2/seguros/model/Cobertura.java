@@ -13,6 +13,7 @@ public enum Cobertura {
 		this.costeBase=coste;
 	}
 	
+	public String getCobertura() {return tipoCobertura;} 
 	public int getCosteBase() {return costeBase;}
 	public String valueOf() {return tipoCobertura;} 
 }
