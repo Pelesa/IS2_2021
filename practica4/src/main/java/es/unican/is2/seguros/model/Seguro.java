@@ -17,12 +17,16 @@ public class Seguro {
 		
 	}
 	
-	public double precio() {return precio;}
+	public double precio() {
+		return precio;
+	}
 	
 	public String toString() {
-		return("Seguro a nombre de: "+cliente.toString()+" con potencia: "+ potenciaCV + "cobertura: "+ cobertura.toString());
+		return("Seguro a nombre de: "+cliente.toString()+" con potencia: "+ potenciaCV + " cobertura: "+ cobertura.toString());
 	}
 	
 	
-	//setFechaUltimoSiniesto TODO
+	public void setFechaUltimoSiniesto(LocalDate date) {
+		this.fechaUltimoSiniestro = date;
+	}
 }
