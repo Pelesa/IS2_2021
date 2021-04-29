@@ -90,6 +90,8 @@ public class SegurosGUI extends JFrame {
 
 			    	Cobertura cobertura = Cobertura.valueOf(comboCobertura.getSelectedItem().toString());
 			    	Seguro seguro = new Seguro(potencia, new Cliente("Pepe", "12345678A", minusvalia), cobertura);
+			    	//El setFecha no estaba??
+			    	seguro.setFechaUltimoSiniesto(fechaUltimoSiniestro);
 			    	precio = seguro.precio();
 			    	txtPrecio.setText(Double.toString(precio));
 			    	System.out.println(seguro.toString());

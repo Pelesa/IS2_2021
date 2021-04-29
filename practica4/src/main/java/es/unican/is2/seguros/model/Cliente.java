@@ -12,6 +12,20 @@ public class Cliente {
 		this.minusvalia=minusvalia;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public String getDNI() {
+		return dni;
+	}
+	
+	public boolean getMinusvalia() {
+		return minusvalia;
+	}
+	
+	
+	
 	public String toString() {
 		return "nombre: "+ nombre +" DNI: "+ dni+ " Minusvalia: "+minusvalia;
 	}

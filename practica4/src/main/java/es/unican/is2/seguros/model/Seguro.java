@@ -1,6 +1,8 @@
 package es.unican.is2.seguros.model;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Seguro {
 	private LocalDate fechaUltimoSiniestro;
@@ -17,12 +19,48 @@ public class Seguro {
 		
 	}
 	
-	public double precio() {return precio;}
+	public void setPrecio() {
+		double base=cobertura.getCosteBase();
+		double incPotencia;
+		if(90<=potenciaCV&&potenciaCV<=110) {
+			incPotencia=base*0.05;
+		}else {
+			incPotencia=base*0.2;
+		}
+		
+		double incSiniestros=0;
+		if(fechaUltimoSiniestro!=null) {
+			Duration since= Duration.between(fechaUltimoSiniestro,LocalDate.now());
+			double anhos=since.toDays()/365;
+			if(anhos<=1) {
+				incSiniestros=200;
+			}else {
+				if(1<anhos&&anhos<=3) {
+					incSiniestros=50;
+				}
+			}
+		}
+		
+		if(cliente.getMinusvalia()) {
+			precio=(base+incPotencia+incSiniestros)*0.75;
+		}else {
+			precio=base+incPotencia+incSiniestros;
+		}
+		
+	}
 	
-	public String toString() {
-		return("Seguro a nombre de: "+cliente.toString()+" con potencia: "+ potenciaCV + "cobertura: "+ cobertura.toString());
+	public double precio() {
+		return precio;
 	}
 	
 	
-	//setFechaUltimoSiniesto TODO
+	public String toString() {
+		return("Seguro a nombre de: "+cliente.toString()+" con potencia: "+ potenciaCV + "cobertura: "+ cobertura.toString()+ " con precio:" + precio);
+	}
+	
+	
+	public void setFechaUltimoSiniesto(LocalDate fecha) {
+		fechaUltimoSiniestro=fecha;
+		setPrecio();
+	}
 }
