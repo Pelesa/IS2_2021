@@ -14,6 +14,7 @@ public class Seguro {
 	private double precio;
 	
 	public Seguro(int potencia, Cliente cliente, Cobertura cobertura) {
+		
 		this.cliente=cliente;
 		this.cobertura=cobertura;
 		this.potenciaCV=potencia;
