@@ -6,20 +6,18 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-public class SeguroTest {
+public class SeguroTestBORRAR {
 
 	@SuppressWarnings("unused")
 	@Test
-	public void constructorTest() {
-		//Seguro(potencia, cliente, cobertura)
-		Cliente c = new Cliente("C1", "DNI1", true);
-		int potencia = 100;
-		assertNull(new Seguro(-1,c, Cobertura.TERCEROS_LUNAS));
-		assertNull(new Seguro(potencia,null, Cobertura.TERCEROS_LUNAS));
-		assertNull(new Seguro(0,null, Cobertura.TODO_RIESGO));
-		assertNull(new Seguro(potencia,c, null));
-		assertNotNull(new Seguro(potencia, c, Cobertura.TODO_RIESGO));
-	}
+    public void constructorTest() {
+        Cliente c = new Cliente("C1", "DNI1", true);
+        int potencia = 100;
+        Seguro seguro = new Seguro(potencia, c, Cobertura.TODO_RIESGO);
+        assertTrue(seguro.getPotenciaCV() == potencia);
+        assertTrue(seguro.getCliente() == c);
+        assertTrue(seguro.getCobertura() == Cobertura.TODO_RIESGO);
+    }
 	
 	@Test
 	public void precioTest() { 

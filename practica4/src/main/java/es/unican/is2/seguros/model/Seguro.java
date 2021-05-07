@@ -22,18 +22,24 @@ public class Seguro {
 	}
 	
 
-	public void setPrecio() {
+	public void setPrecio() throws DatoIncorrectoException{
 		double base=cobertura.getCosteBase();
 		double incPotencia;
-		if(potenciaCV<90) {
-			incPotencia=0;
-		}else {
-			if(90<=potenciaCV&&potenciaCV<=110) {
-				incPotencia=base*0.05;
+		try {
+			if(potenciaCV<90) {
+				incPotencia=0;
 			}else {
-				incPotencia=base*0.2;
+				if(90<=potenciaCV&&potenciaCV<=110) {
+					incPotencia=base*0.05;
+				}else {
+					incPotencia=base*0.2;
+				}
 			}
+		}catch(Exception e){
+			DatoIncorrectoException error= new DatoIncorrectoException("Dato de entrada erroneo");
+			throw error;
 		}
+		
 
 		
 		double incSiniestros=0;
@@ -61,6 +67,17 @@ public class Seguro {
 		return precio;
 	}
 	
+	public int getPotenciaCV() {
+		return potenciaCV;
+	}
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+	
+	public Cobertura getCobertura() {
+		return cobertura;
+	}
 	
 	public String toString() {
 		return("Seguro a nombre de: "+cliente.toString()+" con potencia: "+ potenciaCV + "cobertura: "+ cobertura.toString()+ " con precio:" + precio);
@@ -69,7 +86,6 @@ public class Seguro {
 	
 	public void setFechaUltimoSiniesto(LocalDate fecha) {
 		fechaUltimoSiniestro=fecha;
-		setPrecio();
 	}
 	
 	
