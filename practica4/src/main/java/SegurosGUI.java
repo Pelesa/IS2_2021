@@ -1,4 +1,5 @@
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,6 +10,7 @@ import es.unican.is2.seguros.model.Cliente;
 import es.unican.is2.seguros.model.Cobertura;
 import es.unican.is2.seguros.model.DatoIncorrectoException;
 import es.unican.is2.seguros.model.Seguro;
+
 
 
 import javax.swing.JTextField;
