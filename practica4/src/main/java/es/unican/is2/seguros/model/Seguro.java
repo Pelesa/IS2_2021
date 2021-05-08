@@ -37,12 +37,12 @@ public class Seguro {
 
 			double incSiniestros=0;
 			if(fechaUltimoSiniestro!=null) {
-				Long since = ChronoUnit.DAYS.between(fechaUltimoSiniestro,LocalDate.now());
+				double since = (double)ChronoUnit.DAYS.between(fechaUltimoSiniestro,LocalDate.now());
 				double anhos=since/365;
-				if(anhos<=1) {
+				if(0<anhos && anhos<1) {
 					incSiniestros=200;
 				}else {
-					if(1<anhos&&anhos<=3) {
+					if(1<=anhos&&anhos<=3) {
 						incSiniestros=50;
 					}
 				}
