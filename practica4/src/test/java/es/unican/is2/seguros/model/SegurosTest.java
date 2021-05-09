@@ -1,3 +1,4 @@
+package es.unican.is2.seguros.model;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
@@ -5,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.Assert;
 import org.junit.Test;
-import es.unican.is2.seguros.model.*;
 
 
 
