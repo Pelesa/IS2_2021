@@ -1,0 +1,27 @@
+/*
+Clase:
+IdRefactorizacion(en orden). Descripcion del cambio realizado, hay que añadir una breve explicacion de porque nos parecio un error
+lo que estaba previamente y unas lineas explicando porque nuestro cambio nos parece correcto.
+*/
+
+Cliente: 
+1.Extraidos los datos de la direccion a una clase Direccion.
+
+2.Cambiados atributos de public a private, es mas complejo pero mas seguro de cara a privacidad de los datos
+Añadidos getters y setters a las variable de la clase Cliente.
+
+3.Cambiado el nombre de la variable Cuenta por cuenta, para seguir los estandares java
+
+CuentaAhorro: 
+1.limite de debito en el constructor estaba puesto el valor como inmediato, hemos creado una constante LIMITE_DEBITO_INCIAL
+= 1000 y asignamos a limiteDebito el valor de la constante en el constructor.
+
+2. Obeservamos que se repite el codigo para crear un movimiento en la cuenta en cuatro métodos: ingresa(String,double),ingresa(double), retira(double) y retira
+y retira(String, double) Por ello hemos creado un método creaMovimiento(String, double) que engloba el código que se repetia, no hemos incluido el control de errores del valor double puesto
+que no aporta una ventaja en este caso, si se utilizase en más métodos si podría extraerse a un método que mira que comprueba x >= 0
+
+Movimiento:
+1.refactorizacion de los nombres de los setters y getters para que sean mas fáciles de entrender al leer el codigo a que variable haces referencia
+
+Credito: 
+1. Extraido en un método el calculo del importe total de la cuenta, que se usaba en liquidar y getGastosAcomulados
