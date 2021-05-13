@@ -4,10 +4,10 @@ public abstract class Tarjeta {
 	protected String mNumero, mTitular;		
 	protected CuentaAhorro mCuentaAsociada;
 
-	public Tarjeta(String numero, String titular, CuentaAhorro c) { //WMC +1
+	public Tarjeta(String numero, String titular, CuentaAhorro cuenta) { //WMC +1
 		mNumero = numero;
 		mTitular = titular;
-		mCuentaAsociada = c;
+		mCuentaAsociada = cuenta;
 	}
 
 	/**

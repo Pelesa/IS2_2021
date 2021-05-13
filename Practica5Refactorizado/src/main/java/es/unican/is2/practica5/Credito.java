@@ -22,40 +22,40 @@ public class Credito extends Tarjeta {
 
 	/**
 	 * Retirada de dinero en cajero con la tarjeta
-	 * @param x Cantidad a retirar. Se aplica una comisión del 5%.
+	 * @param cantidad Cantidad a retirar. Se aplica una comisión del 5%.
 	 * @throws saldoInsuficienteException
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {//WMC +1
-		if (x<0) //WMC +1 CCog +1
+	public void retirar(double cantidad) throws saldoInsuficienteException, datoErroneoException {//WMC +1
+		if (cantidad<0) //WMC +1 CCog +1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 
-		x += x * 0.05; // Añadimos una comisión de un 5%
-		if (getGastosAcumulados()+x > mCredito) //WMC +1 CCog +1
+		cantidad += cantidad * 0.05; // Añadimos una comisión de un 5%
+		if (getGastosAcumulados()+cantidad > mCredito) //WMC +1 CCog +1
 			throw new saldoInsuficienteException("Crédito insuficiente");
 		
-		creaMovimiento("Retirada en cajero automático", x);
+		creaMovimiento("Retirada en cajero automático", cantidad);
 	}
 
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException { //WMC +1
-		if (getGastosAcumulados() + x > mCredito) //WMC +1  CCog +1
+	public void pagoEnEstablecimiento(String datos, double cantidad) throws saldoInsuficienteException, datoErroneoException { //WMC +1
+		if (getGastosAcumulados() + cantidad > mCredito) //WMC +1  CCog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 
-		creaMovimiento("Compra a crédito en: " + datos, x);
+		creaMovimiento("Compra a crédito en: " + datos, cantidad);
 	}
 	
-	private void creaMovimiento(String concepto, double x) throws datoErroneoException{
-		if (x<0)  //WMC +1 CCog +1
+	private void creaMovimiento(String concepto, double cantidad) throws datoErroneoException{
+		if (cantidad<0)  //WMC +1 CCog +1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
-		Movimiento m = new Movimiento();
+		Movimiento movimiento = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setFecha(now);
-		m.setConcepto(concepto);
-		m.setImporte(-x);
-		mMovimientosMensuales.add(m);
+		movimiento.setFecha(now);
+		movimiento.setConcepto(concepto);
+		movimiento.setImporte(-cantidad);
+		mMovimientosMensuales.add(movimiento);
 	}	
 	
     public double getGastosAcumulados() { //WMC +1
@@ -75,10 +75,10 @@ public class Credito extends Tarjeta {
 		LocalDateTime now = LocalDateTime.now();
 		liq.setFecha(now);
 		liq.setConcepto("Liquidación de operaciones tarjeta crédito");
-		double r = calculaImporte();
-		liq.setImporte(r);
+		double importe = calculaImporte();
+		liq.setImporte(importe);
 	
-		if (r != 0) //WMC +1 CCog +1
+		if (importe != 0) //WMC +1 CCog +1
 			mCuentaAsociada.addMovimiento(liq);
 		
 		mhistoricoMovimientos.addAll(mMovimientosMensuales);
@@ -86,12 +86,12 @@ public class Credito extends Tarjeta {
 	}
 	
 	private double calculaImporte() {
-		double r = 0.0;
+		double importe = 0.0;
 		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) { //WMC +1 CCog +1
 			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
-			r += m.getImporte();
+			importe += m.getImporte();
 		}
-		return r;
+		return importe;
 	}
 	
 

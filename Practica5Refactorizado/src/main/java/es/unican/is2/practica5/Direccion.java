@@ -1,38 +1,38 @@
 package es.unican.is2.practica5;
 
 public class Direccion {
-	private String calle;
-	private String zip;
-	private String localidad;
+	private String mCalle;
+	private String mZip;
+	private String mLocalidad;
 	
 	public Direccion(String calle, String zip, String localidad) {
-		this.calle = calle;
-		this.zip = zip;
-		this.localidad = localidad;
+		this.mCalle = calle;
+		this.mZip = zip;
+		this.mLocalidad = localidad;
 	}
 	
 	public String getCalle() {
-		return calle;
+		return mCalle;
 	}
 
 	public void setCalle(String calle) {
-		this.calle = calle;
+		this.mCalle = calle;
 	}
 
 	public String getZip() {
-		return zip;
+		return mZip;
 	}
 
 	public void setZip(String zip) {
-		this.zip = zip;
+		this.mZip = zip;
 	}
 
 	public String getLocalidad() {
-		return localidad;
+		return mLocalidad;
 	}
 
 	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
+		this.mLocalidad = localidad;
 	}
 	
 }

@@ -3,11 +3,13 @@ Clase:
 IdRefactorizacion(en orden). Descripcion del cambio realizado, hay que añadir una breve explicacion de porque nos parecio un error
 lo que estaba previamente y unas lineas explicando porque nuestro cambio nos parece correcto.
 */
-GENERAL: 
-Para mantener la consistencia los nombres de los atributos de las clases empezaran todos por m, ejemplo: mNombre, refactorizamos todas las variables para que tengan este estilo.
-Hemos elegido este estilo por ser el mayoritario en la aplicación incial.
 
-Cliente: 
+GENERAL:
+ 
+Para mantener la consistencia los nombres de los atributos de las clases empezaran todos por m, ejemplo: mNombre, refactorizamos todas las variables para que tengan este estilo.
+
+Cliente:
+ 
 1.Extraidos los datos de la direccion a una clase Direccion.
 
 2.Cambiados atributos de public a private, es mas complejo pero mas seguro de cara a privacidad de los datos
@@ -16,6 +18,7 @@ Añadidos getters y setters a las variable de la clase Cliente.
 3.Cambiado el nombre de la variable Cuenta por cuenta, para seguir los estandares java
 
 CuentaAhorro: 
+
 1.limite de debito en el constructor estaba puesto el valor como inmediato, hemos creado una constante LIMITE_DEBITO_INCIAL
 = 1000 y asignamos a limiteDebito el valor de la constante en el constructor.
 
@@ -23,11 +26,39 @@ CuentaAhorro:
 y retira(String, double) Por ello hemos creado un método creaMovimiento(String, double) que engloba el código que se repetia, no hemos incluido el control de errores del valor double puesto
 que no aporta una ventaja en este caso, si se utilizase en más métodos si podría extraerse a un método que mira que comprueba x >= 0
 
+3. Cambiado el nombre de las variables x por cantidad, es mas explicativo a la hora de leer el código
+
+4. Cambiado el nombre de las variables r por importe, es mas explicativo...
+
+5. Cambiado el nombre de la variable m por movimiento, ...
+
 Movimiento:
+
 1.refactorizacion de los nombres de los setters y getters para que sean mas fáciles de entrender al leer el codigo a que variable haces referencia
 
 Credito: 
+
 1. Extraido en un método el calculo del importe total de la cuenta, que se usaba en liquidar y getGastosAcomulados
 
 2. Extraido a un método el codigo referente a crear un movimiento. El codigo repetido estaba en retirar(double) y en pagoEnEstablecimiento(String, double) Se añade la gestion de errores
 en este método, para reducir el WMC en 1 en este caso, y en n-1 siendo n el numero de métodos que tuviesen que hacer este control de errores.
+
+3. Cambiado el nombre de las variables x por cantidad, es mas explicativo a la hora de leer el código
+
+4. Cambiado el nombre de las variables r por importe, es mas explicativo...
+
+5. Cambiado el nombre de la variable m por movimiento, ...
+
+Debito:
+
+1. Cambiado el nombre de las variables x por cantidad, es mas explicativo a la hora de leer el código
+
+2.Cambiado el nombre de la variable del constructor c por cuenta para que sea autoexplicativo a la hora de leer el código.
+
+Direccion:
+
+1.Aplicados los cambios generales -> seguir formato mCalle por ejemplo.
+
+Tarjeta:
+
+1.Cambiado el nombre de la variable del constructor c por cuenta para que sea autoexplicativo a la hora de leer el código.

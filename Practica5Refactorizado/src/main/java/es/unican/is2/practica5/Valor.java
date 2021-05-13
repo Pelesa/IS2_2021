@@ -2,35 +2,35 @@ package es.unican.is2.practica5;
 
 public class Valor {
 	
-	private String entidad;	
-	private int numValores;
-	private double cotizacionActual;
+	private String mEntidad;	
+	private int mNumValores;
+	private double mCotizacionActual;
 	
 	public Valor(String entidad, int numValores, double cotizacionActual) {//WMC +1
 		super();
-		this.entidad = entidad;
-		this.numValores = numValores;
-		this.cotizacionActual = cotizacionActual;
+		this.mEntidad = entidad;
+		this.mNumValores = numValores;
+		this.mCotizacionActual = cotizacionActual;
 	}
 	
 	public int getNumValores() {//WMC +1
-		return numValores;
+		return mNumValores;
 	}
 
 	public void setNumValores(int numValores) {//WMC +1
-		this.numValores = numValores;
+		this.mNumValores = numValores;
 	}
 
 	public double getCotizacionActual() {//WMC +1
-		return cotizacionActual;
+		return mCotizacionActual;
 	}
 
 	public void setCotizacionActual(double cotizacionActual) {//WMC +1
-		this.cotizacionActual = cotizacionActual;
+		this.mCotizacionActual = cotizacionActual;
 	}
 
 	public String getEntidad() {//WMC +1
-		return entidad;
+		return mEntidad;
 	}
 
 

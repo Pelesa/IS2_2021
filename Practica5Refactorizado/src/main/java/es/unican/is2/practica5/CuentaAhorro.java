@@ -21,50 +21,50 @@ public class CuentaAhorro extends Cuenta {
 		mLimiteDebito = LIMITE_DEBITO_INCIAL;
 	}
 
-	public void ingresar(double x) throws datoErroneoException { //WMC +1
-		if (x <= 0) //WMC +1 CCog +1
+	public void ingresar(double cantidad) throws datoErroneoException { //WMC +1
+		if (cantidad <= 0) //WMC +1 CCog +1
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
-		creaMovimiento("Ingreso en efectivo", x);
+		creaMovimiento("Ingreso en efectivo", cantidad);
 	}
 
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException { //WMC +1
-		if (x <= 0) //WMC +1 CCog +1
+	public void retirar(double cantidad) throws saldoInsuficienteException, datoErroneoException { //WMC +1
+		if (cantidad <= 0) //WMC +1 CCog +1
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
-		if (getSaldo() < x) //WMC +1 CCog +1
+		if (getSaldo() < cantidad) //WMC +1 CCog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
-		creaMovimiento("Retirada de efectivo", -x);
+		creaMovimiento("Retirada de efectivo", -cantidad);
 	}
 
-	public void ingresar(String concepto, double x) throws datoErroneoException { //WMC +1
-		if (x <= 0) //WMC +1 CCog +1
+	public void ingresar(String concepto, double cantidad) throws datoErroneoException { //WMC +1
+		if (cantidad <= 0) //WMC +1 CCog +1
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
-		creaMovimiento(concepto, x);
+		creaMovimiento(concepto, cantidad);
 	}
 	
-	public void retirar(String concepto, double x) throws saldoInsuficienteException, datoErroneoException { //WMC +1
-		if (x <= 0) //WMC +1 CCog +1
+	public void retirar(String concepto, double cantidad) throws saldoInsuficienteException, datoErroneoException { //WMC +1
+		if (cantidad <= 0) //WMC +1 CCog +1
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
-		if (getSaldo() < x) //WMC +1 CCog +1
+		if (getSaldo() < cantidad) //WMC +1 CCog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
-		creaMovimiento(concepto, -x);
+		creaMovimiento(concepto, -cantidad);
 	}
 	
-	private void creaMovimiento(String concepto, double x) throws datoErroneoException { //WMC +1
-		Movimiento m = new Movimiento();
+	private void creaMovimiento(String concepto, double cantidad) throws datoErroneoException { //WMC +1
+		Movimiento movimiento = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setFecha(now);
-		m.setConcepto(concepto);
-		m.setImporte(x);
-		this.mMovimientos.add(m);
+		movimiento.setFecha(now);
+		movimiento.setConcepto(concepto);
+		movimiento.setImporte(cantidad);
+		this.mMovimientos.add(movimiento);
 	}
 
 	public double getSaldo() { //WMC +1
-		double r = 0.0;
+		double importe = 0.0;
 		for (int i = 0; i < this.mMovimientos.size(); i++) { //WMC +1 CCog +1
 			Movimiento m = (Movimiento) mMovimientos.get(i);
-			r += m.getImporte();
+			importe += m.getImporte();
 		}
-		return r;
+		return importe;
 	}
 
 	public void addMovimiento(Movimiento m) { //WMC +1
