@@ -4,19 +4,19 @@ import java.util.List;
 
 public class CuentaValores extends Cuenta {
 
-	private List<Valor> valores;
+	private List<Valor> mValores;
 	
 	public CuentaValores(String numCuenta, List<Valor> valores) { //WMC +1
 		super(numCuenta);
-		this.valores = valores;
+		this.mValores = valores;
 	}
 	
 	public List<Valor> getValores() { //WMC +1
-		return valores;
+		return mValores;
 	}
 	
 	public void anhadeValor(Valor v) { //WMC +1
-		valores.add(v);
+		mValores.add(v);
 	}
 	
 	

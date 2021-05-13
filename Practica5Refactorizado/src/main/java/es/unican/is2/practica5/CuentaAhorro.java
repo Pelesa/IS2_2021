@@ -11,14 +11,14 @@ public class CuentaAhorro extends Cuenta {
 	private LocalDate mFechaDeCaducidadTarjetaDebito;
 	private LocalDate mFechaDeCaducidadTarjetaCredito;
 	private final static double LIMITE_DEBITO_INCIAL = 1000;
-	private double limiteDebito;
+	private double mLimiteDebito;
 
 	public CuentaAhorro(String numCuenta, LocalDate date, LocalDate date2) { //WMC +1
 		super(numCuenta);
 		this.mFechaDeCaducidadTarjetaDebito = date;
 		this.mFechaDeCaducidadTarjetaCredito = date2;
 		mMovimientos = new LinkedList<Movimiento>();
-		limiteDebito = LIMITE_DEBITO_INCIAL;
+		mLimiteDebito = LIMITE_DEBITO_INCIAL;
 	}
 
 	public void ingresar(double x) throws datoErroneoException { //WMC +1
@@ -41,7 +41,6 @@ public class CuentaAhorro extends Cuenta {
 		creaMovimiento(concepto, x);
 	}
 	
-
 	public void retirar(String concepto, double x) throws saldoInsuficienteException, datoErroneoException { //WMC +1
 		if (x <= 0) //WMC +1 CCog +1
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
@@ -85,7 +84,7 @@ public class CuentaAhorro extends Cuenta {
 	}
 
 	public double getLimiteDebito() { //WMC +1
-		return limiteDebito;
+		return mLimiteDebito;
 	}
 
 }

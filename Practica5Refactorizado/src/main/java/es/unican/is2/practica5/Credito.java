@@ -30,36 +30,33 @@ public class Credito extends Tarjeta {
 	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {//WMC +1
 		if (x<0) //WMC +1 CCog +1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
-		
-		Movimiento m = new Movimiento();
-		LocalDateTime now = LocalDateTime.now();
-		m.setFecha(now);
-		m.setConcepto("Retirada en cajero automático");
+
 		x += x * 0.05; // Añadimos una comisión de un 5%
-		m.setImporte(-x);
-		
 		if (getGastosAcumulados()+x > mCredito) //WMC +1 CCog +1
 			throw new saldoInsuficienteException("Crédito insuficiente");
-		else {
-			mMovimientosMensuales.add(m);
-		}
+		
+		creaMovimiento("Retirada en cajero automático", x);
 	}
 
 	@Override
 	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException { //WMC +1
-		if (x<0)  //WMC +1 CCog +1
-			throw new datoErroneoException("No se puede retirar una cantidad negativa");
-		
 		if (getGastosAcumulados() + x > mCredito) //WMC +1  CCog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
+
+		creaMovimiento("Compra a crédito en: " + datos, x);
+	}
+	
+	private void creaMovimiento(String concepto, double x) throws datoErroneoException{
+		if (x<0)  //WMC +1 CCog +1
+			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		m.setFecha(now);
-		m.setConcepto("Compra a crédito en: " + datos);
+		m.setConcepto(concepto);
 		m.setImporte(-x);
 		mMovimientosMensuales.add(m);
-	}
+	}	
 	
     public double getGastosAcumulados() { //WMC +1
 		return -calculaImporte();

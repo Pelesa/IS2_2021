@@ -3,6 +3,9 @@ Clase:
 IdRefactorizacion(en orden). Descripcion del cambio realizado, hay que añadir una breve explicacion de porque nos parecio un error
 lo que estaba previamente y unas lineas explicando porque nuestro cambio nos parece correcto.
 */
+GENERAL: 
+Para mantener la consistencia los nombres de los atributos de las clases empezaran todos por m, ejemplo: mNombre, refactorizamos todas las variables para que tengan este estilo.
+Hemos elegido este estilo por ser el mayoritario en la aplicación incial.
 
 Cliente: 
 1.Extraidos los datos de la direccion a una clase Direccion.
@@ -25,3 +28,6 @@ Movimiento:
 
 Credito: 
 1. Extraido en un método el calculo del importe total de la cuenta, que se usaba en liquidar y getGastosAcomulados
+
+2. Extraido a un método el codigo referente a crear un movimiento. El codigo repetido estaba en retirar(double) y en pagoEnEstablecimiento(String, double) Se añade la gestion de errores
+en este método, para reducir el WMC en 1 en este caso, y en n-1 siendo n el numero de métodos que tuviesen que hacer este control de errores.

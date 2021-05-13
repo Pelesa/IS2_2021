@@ -5,23 +5,23 @@ import java.util.List;
 
 public class Cliente {
 	
-	private String nombre;
-	private String telefono;
-	private String dni;
-	private Direccion direccion;
+	private String mNombre;
+	private String mTelefono;
+	private String mDni;
+	private Direccion mDireccion;
 	
-    private List<Cuenta> cuentas = new LinkedList<Cuenta>();
+    private List<Cuenta> mCuentas = new LinkedList<Cuenta>();
 
     
  	public Cliente(String titular, String telefono, String dni) { //WMC +1  
-		this.nombre = titular;
-		this.telefono = telefono;
-		this.dni = dni;
+		this.mNombre = titular;
+		this.mTelefono = telefono;
+		this.mDni = dni;
 	}
 	
 	public double getSaldoTotal() {//WMC +1
 		double total = 0.0;
-		for (Cuenta c: cuentas) {  //WMC +1 CCog +1
+		for (Cuenta c: mCuentas) {  //WMC +1 CCog +1
 			if (c instanceof CuentaAhorro) { //WMC +1 CCog +2 
 				total += ((CuentaAhorro) c).getSaldo();
 			} else if (c instanceof CuentaValores)  { //WMC +1 CCog +3
@@ -34,41 +34,39 @@ public class Cliente {
 	}
 	
 	public void anhadeCuenta(Cuenta c) { //WMC +1
-		cuentas.add(c);
+		mCuentas.add(c);
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombre() { //WMC +1
+		return mNombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nombre) { //WMC +1
+		this.mNombre = nombre;
 	}
 
-	public String getTelefono() {
-		return telefono;
+	public String getTelefono() { //WMC +1
+		return mTelefono;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setTelefono(String telefono) { //WMC +1
+		this.mTelefono = telefono;
 	}
 
-	public String getDni() {
-		return dni;
+	public String getDni() { //WMC +1
+		return mDni;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setDni(String dni) { //WMC +1
+		this.mDni = dni;
 	}
 
-	public Direccion getDireccion() {
-		return direccion;
+	public Direccion getDireccion() { //WMC +1
+		return mDireccion;
 	}
 
-	public void setDireccion(Direccion direccion) {
-		this.direccion = direccion;
+	public void setDireccion(Direccion direccion) { //WMC +1
+		this.mDireccion = direccion;
 	}
-	
-	
 	
 }
