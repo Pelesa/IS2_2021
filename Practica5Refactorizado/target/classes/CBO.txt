@@ -1,0 +1,63 @@
+Clase -> Clases que usa
+
+Cliente -> Cuenta , CuentaAhorro, CuentaValores, Valor, Direccion
+
+Direccion -> no usa
+
+Credito -> Movimiento, Tarjeta
+
+Cuenta -> no usa 
+
+CuentaAhorro -> Cuenta, Movimiento, datoErroneoException, saldoInsuficienteException
+
+CuentaValores -> Cuenta, Valor,
+
+Debito -> Tarjeta, datoErroneoException, saldoInsuficienteException
+
+Movimiento -> no usa
+
+Tarjeta -> CuentaAhorro, datoErroneoException, saldoInsuficienteException
+
+Valor -> no usa
+
+Cliente:
+	AFF : 0
+	EFF : Cuenta , CuentaAhorro, CuentaValores, Valor, Direccion
+	TOTAL = 5
+Direccion:
+	AFF : Cliente
+	EFF : 0
+	TOTAL = 1	
+Credito:
+	AFF : 0
+	EFF : Movimiento, Tarjeta
+	TOTAL = 2
+Cuenta:
+	AFF : Cliente, CuentaAhorro, CuentaValores
+	EFF : 0
+	TOTAL = 3
+CuentaAhorro:
+	AFF : Cliente, Tarjeta
+	EFF : Cuenta, Movimiento, datoErroneoException, saldoInsuficienteException
+	TOTAL = 6
+CuentaValores:
+	AFF : Cliente
+	EFF : Cuenta, Valor
+	TOTAL = 3
+Debito:
+	AFF : 0
+	EFF : Tarjeta, datoErroneoException, saldoInsuficienteException
+	TOTAL = 3
+Movimiento:
+	AFF : Credito, CuentaAhorro
+	EFF : 0
+	TOTAL = 2
+Tarjeta:
+	AFF : Credito, Debito
+	EFF : CuentaAhorro, datoErroneoException, saldoInsuficienteException
+	TOTAL = 5
+Valor:
+	AFF : Cliente, CuentaValores 
+	EFF : 0
+	TOTAL = 2
+	

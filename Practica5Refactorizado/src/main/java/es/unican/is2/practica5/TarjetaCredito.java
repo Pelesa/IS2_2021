@@ -6,14 +6,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Credito extends Tarjeta {
+public class TarjetaCredito extends Tarjeta {
 	
 	private double mCredito;
 	private List<Movimiento> mMovimientosMensuales;
 	private List<Movimiento> mhistoricoMovimientos;
 	
 	
-	public Credito(String numero, String titular, CuentaAhorro c, double credito) { //WMC +1
+	public TarjetaCredito(String numero, String titular, CuentaAhorro c, double credito) { //WMC +1
 		super(numero, titular, c);
 		mCredito = credito;
 		mMovimientosMensuales = new LinkedList<Movimiento>();
@@ -32,7 +32,7 @@ public class Credito extends Tarjeta {
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 
 		cantidad += cantidad * 0.05; // Añadimos una comisión de un 5%
-		if (getGastosAcumulados()+cantidad > mCredito) //WMC +1 CCog +1
+		if (getGastosAcumulados() + cantidad > mCredito) //WMC +1 CCog +1
 			throw new saldoInsuficienteException("Crédito insuficiente");
 		
 		creaMovimiento("Retirada en cajero automático", cantidad);

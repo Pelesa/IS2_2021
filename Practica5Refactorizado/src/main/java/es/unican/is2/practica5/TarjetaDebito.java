@@ -2,11 +2,11 @@ package es.unican.is2.practica5;
 
 import java.time.LocalDate;
 
-public class Debito extends Tarjeta {
+public class TarjetaDebito extends Tarjeta {
 	
 	private double saldoDiarioDisponible;
 
-	public Debito(String numero, String titular, CuentaAhorro cuenta) { //WMC +1
+	public TarjetaDebito(String numero, String titular, CuentaAhorro cuenta) { //WMC +1
 		super(numero, titular, cuenta);
 	}
 	

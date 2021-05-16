@@ -49,12 +49,15 @@ en este método, para reducir el WMC en 1 en este caso, y en n-1 siendo n el nume
 
 5. Cambiado el nombre de la variable m por movimiento, ...
 
+6. Cambiado el nombre a la clase a TarjetaCredito para indicar que extiende de Tarjeta de manera mas sencilla.
+
 Debito:
 
 1. Cambiado el nombre de las variables x por cantidad, es mas explicativo a la hora de leer el código
 
 2.Cambiado el nombre de la variable del constructor c por cuenta para que sea autoexplicativo a la hora de leer el código.
 
+3. Cambiado el nombre a la clase a TarjetaDebito para indicar que extiende de Tarjeta de manera mas sencilla.
 Direccion:
 
 1.Aplicados los cambios generales -> seguir formato mCalle por ejemplo.
