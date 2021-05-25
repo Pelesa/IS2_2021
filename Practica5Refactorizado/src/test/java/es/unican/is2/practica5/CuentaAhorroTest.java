@@ -57,10 +57,10 @@ public class CuentaAhorroTest {
 		
 		try {
 			sut.retirar(-10);
-			fail("Debería lanzar DatoErroneoException");
+			fail("Deberï¿½a lanzar DatoErroneoException");
 		} catch (datoErroneoException e) {
 		} catch (saldoInsuficienteException e) {
-			fail("Debería lanzar DatoErroneoException");
+			fail("Deberï¿½a lanzar DatoErroneoException");
 		}
 		
 		sut.addMovimiento(m1);
@@ -71,17 +71,17 @@ public class CuentaAhorroTest {
 			assertTrue(sut.getMovimientos().size()==2);
 			assertTrue(sut.getMovimientos().get(1).getConcepto().equals("Retirada de efectivo"));
 		} catch (datoErroneoException e) {
-			fail("No debería lanzar DatoErroneoException");
+			fail("No deberï¿½a lanzar DatoErroneoException");
 		} catch (saldoInsuficienteException e) {
-			fail("No debería lanzar SaldoInsuficienteException");
+			fail("No deberï¿½a lanzar SaldoInsuficienteException");
 		}
 		
 		
 		try {
 			sut.retirar(100);
-			fail("Debería lanzar SaldoInsuficienteException");
+			fail("Deberï¿½a lanzar SaldoInsuficienteException");
 		} catch (datoErroneoException e) {
-			fail("Debería lanzar SaldoInsuficienteException");
+			fail("Deberï¿½a lanzar SaldoInsuficienteException");
 		} catch (saldoInsuficienteException e) {
 			
 		}
@@ -94,7 +94,7 @@ public class CuentaAhorroTest {
 		// Test ingresar negativo
 		try {
 			sut.ingresar(-1);
-			fail("Debería lanzar DatoErroneoException");
+			fail("Deberï¿½a lanzar DatoErroneoException");
 		} catch (datoErroneoException e) {
 		}
 
@@ -110,7 +110,7 @@ public class CuentaAhorroTest {
 			assertTrue(sut.getMovimientos().size()==2);
 			
 		} catch (datoErroneoException e) {
-			fail("No debería lanzar la excepción");
+			fail("No deberï¿½a lanzar la excepciï¿½n");
 		}
 		
 	}

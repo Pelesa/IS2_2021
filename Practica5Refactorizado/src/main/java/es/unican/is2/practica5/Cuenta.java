@@ -4,7 +4,7 @@ public abstract class Cuenta {
 	
 	private String mNumCuenta;
 	
-	public Cuenta(String numCuenta) { //WMC +1
+	protected Cuenta(String numCuenta) { //WMC +1
 		this.mNumCuenta = numCuenta;
 	}
 	

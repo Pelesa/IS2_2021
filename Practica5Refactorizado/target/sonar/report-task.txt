@@ -1,6 +1,6 @@
-projectKey=es.unican.is2:Practica5Refactorizado
+projectKey=SWIIp5
 serverUrl=http://localhost:9000
 serverVersion=8.9.0.43852
-dashboardUrl=http://localhost:9000/dashboard?id=es.unican.is2%3APractica5Refactorizado
-ceTaskId=AXmi5TYxN2Muw2TCQdh6
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AXmi5TYxN2Muw2TCQdh6
+dashboardUrl=http://localhost:9000/dashboard?id=SWIIp5
+ceTaskId=AXmjSPKIlCQ_iX0hQCh5
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXmjSPKIlCQ_iX0hQCh5

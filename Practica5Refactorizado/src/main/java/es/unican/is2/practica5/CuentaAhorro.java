@@ -10,8 +10,10 @@ public class CuentaAhorro extends Cuenta {
 	private List<Movimiento> mMovimientos;
 	private LocalDate mFechaDeCaducidadTarjetaDebito;
 	private LocalDate mFechaDeCaducidadTarjetaCredito;
-	private final static double LIMITE_DEBITO_INCIAL = 1000;
+	private static final double LIMITE_DEBITO_INCIAL = 1000;
 	private double mLimiteDebito;
+
+	private static final String DATO_ERRONEO_MSG="No se puede ingresar una cantidad negativa";
 
 	public CuentaAhorro(String numCuenta, LocalDate date, LocalDate date2) { //WMC +1
 		super(numCuenta);
@@ -23,13 +25,13 @@ public class CuentaAhorro extends Cuenta {
 
 	public void ingresar(double cantidad) throws datoErroneoException { //WMC +1
 		if (cantidad <= 0) //WMC +1 CCog +1
-			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
+			throw new datoErroneoException(DATO_ERRONEO_MSG);
 		creaMovimiento("Ingreso en efectivo", cantidad);
 	}
 
 	public void retirar(double cantidad) throws saldoInsuficienteException, datoErroneoException { //WMC +1
 		if (cantidad <= 0) //WMC +1 CCog +1
-			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
+			throw new datoErroneoException(DATO_ERRONEO_MSG);
 		if (getSaldo() < cantidad) //WMC +1 CCog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		creaMovimiento("Retirada de efectivo", -cantidad);
@@ -37,13 +39,13 @@ public class CuentaAhorro extends Cuenta {
 
 	public void ingresar(String concepto, double cantidad) throws datoErroneoException { //WMC +1
 		if (cantidad <= 0) //WMC +1 CCog +1
-			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
+			throw new datoErroneoException(DATO_ERRONEO_MSG);
 		creaMovimiento(concepto, cantidad);
 	}
 	
 	public void retirar(String concepto, double cantidad) throws saldoInsuficienteException, datoErroneoException { //WMC +1
 		if (cantidad <= 0) //WMC +1 CCog +1
-			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
+			throw new datoErroneoException(DATO_ERRONEO_MSG);
 		if (getSaldo() < cantidad) //WMC +1 CCog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		creaMovimiento(concepto, -cantidad);
@@ -61,7 +63,7 @@ public class CuentaAhorro extends Cuenta {
 	public double getSaldo() { //WMC +1
 		double importe = 0.0;
 		for (int i = 0; i < this.mMovimientos.size(); i++) { //WMC +1 CCog +1
-			Movimiento m = (Movimiento) mMovimientos.get(i);
+			Movimiento m = mMovimientos.get(i);
 			importe += m.getImporte();
 		}
 		return importe;

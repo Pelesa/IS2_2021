@@ -1,10 +1,11 @@
 package es.unican.is2.practica5;
 
 public abstract class Tarjeta {
-	protected String mNumero, mTitular;		
+	protected String mNumero;		
+	protected String mTitular;
 	protected CuentaAhorro mCuentaAsociada;
 
-	public Tarjeta(String numero, String titular, CuentaAhorro cuenta) { //WMC +1
+	protected Tarjeta(String numero, String titular, CuentaAhorro cuenta) { //WMC +1
 		mNumero = numero;
 		mTitular = titular;
 		mCuentaAsociada = cuenta;

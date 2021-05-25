@@ -22,7 +22,7 @@ public class TarjetaCredito extends Tarjeta {
 
 	/**
 	 * Retirada de dinero en cajero con la tarjeta
-	 * @param cantidad Cantidad a retirar. Se aplica una comisión del 5%.
+	 * @param cantidad Cantidad a retirar. Se aplica una comisiï¿½n del 5%.
 	 * @throws saldoInsuficienteException
 	 * @throws datoErroneoException
 	 */
@@ -31,11 +31,11 @@ public class TarjetaCredito extends Tarjeta {
 		if (cantidad<0) //WMC +1 CCog +1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 
-		cantidad += cantidad * 0.05; // Añadimos una comisión de un 5%
+		cantidad += cantidad * 0.05; // Aï¿½adimos una comisiï¿½n de un 5%
 		if (getGastosAcumulados() + cantidad > mCredito) //WMC +1 CCog +1
-			throw new saldoInsuficienteException("Crédito insuficiente");
+			throw new saldoInsuficienteException("Crï¿½dito insuficiente");
 		
-		creaMovimiento("Retirada en cajero automático", cantidad);
+		creaMovimiento("Retirada en cajero automï¿½tico", cantidad);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class TarjetaCredito extends Tarjeta {
 		if (getGastosAcumulados() + cantidad > mCredito) //WMC +1  CCog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 
-		creaMovimiento("Compra a crédito en: " + datos, cantidad);
+		creaMovimiento("Compra a crï¿½dito en: " + datos, cantidad);
 	}
 	
 	private void creaMovimiento(String concepto, double cantidad) throws datoErroneoException{
@@ -68,13 +68,13 @@ public class TarjetaCredito extends Tarjeta {
 	}
 
 	/**
-	 * Método que se invoca automáticamente el día 1 de cada mes
+	 * Mï¿½todo que se invoca automï¿½ticamente el dï¿½a 1 de cada mes
 	 */
 	public void liquidar() { //WMC +1
 		Movimiento liq = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		liq.setFecha(now);
-		liq.setConcepto("Liquidación de operaciones tarjeta crédito");
+		liq.setConcepto("Liquidaciï¿½n de operaciones tarjeta crï¿½dito");
 		double importe = calculaImporte();
 		liq.setImporte(importe);
 	
@@ -88,7 +88,7 @@ public class TarjetaCredito extends Tarjeta {
 	private double calculaImporte() {
 		double importe = 0.0;
 		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) { //WMC +1 CCog +1
-			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
+			Movimiento m = mMovimientosMensuales.get(i);
 			importe += m.getImporte();
 		}
 		return importe;
